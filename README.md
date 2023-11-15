@@ -9,6 +9,10 @@
 
 ## About XLR8 RMS
 
+## Requirements
+- PHP 8.2
+- MariaDB 10.6
+- Laravel Sail
 
 ## Installation
 
