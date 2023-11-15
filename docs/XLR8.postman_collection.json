@@ -1,0 +1,153 @@
+{
+	"info": {
+		"_postman_id": "6677cb5e-ae3b-4170-b35b-7bc293906b27",
+		"name": "XLR8",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15369634"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var response = JSON.parse(responseBody);",
+							"",
+							"    if (response.access_token) {",
+							"        postman.setEnvironmentVariable(\"accessToken\", 'Bearer ' + response.access_token);",
+							"    }",
+							"} else {",
+							"    pm.expect.fail(\"statuscode not 200\");",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "admin@admin.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "secret",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Hotels",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{url}}/api/hotels",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"hotels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Hotel",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/api/hotels/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"hotels",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Room Price",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/api/hotels/1?checkin=2023-12-12&checkout=2023-12-20",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"hotels",
+						"1"
+					],
+					"query": [
+						{
+							"key": "checkin",
+							"value": "2023-12-12"
+						},
+						{
+							"key": "checkout",
+							"value": "2023-12-20"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
